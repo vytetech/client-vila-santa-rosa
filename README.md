@@ -1,24 +1,98 @@
 # Vila Santa Rosa
 
-Aplicação oficial da Pousada Vila Santa Rosa, construída com React, Vite, Hono, tRPC, Drizzle ORM e MySQL.
+Website oficial e painel administrativo da Pousada Vila Santa Rosa, em Ilhabela.
 
-## Produção
+O projeto entrega site público multi-idioma, pré-renderização SEO, fluxo de reservas, área do hóspede, painel administrativo, gestão de fotos, suítes, preços, noites mínimas, datas bloqueadas, cupons, avaliações e usuários.
 
-Infraestrutura oficial:
+## Stack
 
-- Railway
-- Node.js 20
-- MySQL Railway via `DATABASE_URL`
-- Railway Volume para uploads administrativos
-- Build: `npm run build:full`
-- Pre-deploy: `npm run db:push`
-- Start: `npm start`
+- Frontend: React 19, Vite 7, TypeScript, Tailwind CSS, Radix UI.
+- Backend: Hono, tRPC, Node.js.
+- Banco de dados: MySQL com Drizzle ORM.
+- Testes: Vitest.
+- Build: Vite, scripts de prerender/SEO e esbuild para o backend.
+- Deploy: Railway com Railpack.
 
-Não é necessário relinkar o projeto Railway. O diretório atual deve continuar vinculado ao projeto e serviço existentes.
+## Requisitos
 
-## Variáveis
+- Node.js 20.
+- npm 10.x, compatível com `>=10.5.0 <11`.
+- MySQL acessível por `DATABASE_URL`.
 
-Obrigatórias:
+O projeto possui `.node-version` e `.nvmrc` com Node 20.
+
+## Instalação Local
+
+```bash
+npm ci --include=dev
+```
+
+O projeto usa o registry oficial configurado em `.npmrc`:
+
+```text
+https://registry.npmjs.org/
+```
+
+## Desenvolvimento
+
+```bash
+npm run dev
+```
+
+Rotas principais:
+
+- `/` redireciona para `/pt/`.
+- `/pt/`, `/en/`, `/es/`, `/fr/`, `/ar/`, `/zh/`, `/ja/`: site público.
+- `/login`: login do hóspede.
+- `/conta`: área do hóspede.
+- `/pagamento`: etapa de pagamento/reserva.
+- `/admin-access`: login administrativo por usuário e senha.
+- `/admin`: painel administrativo.
+
+## Scripts
+
+```bash
+npm run check          # TypeScript
+npm run lint           # ESLint
+npm run test           # Vitest
+npm run verify:assets  # valida referências internas de assets
+npm run seo:check      # valida SEO pré-renderizado
+npm run build:full     # build completo de produção
+npm start              # inicia dist/boot.js em produção
+```
+
+Banco:
+
+```bash
+npm run db:push
+```
+
+`db:push` executa migrations versionadas/idempotentes em `scripts/db-migrate.mjs` e valida o schema com `scripts/db-validate.mjs`. Ele não usa `drizzle-kit push` em produção para evitar prompt interativo.
+
+## Build de Produção
+
+```bash
+npm run build:full
+```
+
+Esse comando executa:
+
+1. `vite build`
+2. `node scripts/prerender.mjs`
+3. `node scripts/seo-validate.mjs`
+4. `esbuild api/boot.ts --platform=node --bundle --format=esm --outdir=dist`
+
+Saída esperada:
+
+- `dist/public`: frontend estático.
+- `dist/boot.js`: backend Node empacotado.
+- rotas pré-renderizadas para `/pt/`, `/en/`, `/es/`, `/fr/`, `/ar/`, `/zh/`, `/ja/`.
+
+## Variáveis de Ambiente
+
+Consulte `.env.example` e [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md).
+
+Obrigatórias em produção:
 
 ```env
 DATABASE_URL=
@@ -44,16 +118,20 @@ SMTP_PASS=
 SMTP_FROM=
 ```
 
-## Desenvolvimento
+## Deploy Railway
+
+O Railway usa `railpack.json`.
+
+Pipeline esperado:
+
+- Install: `npm ci --include=dev`
+- Build: `npm run build:full`
+- Start: `npm start`
+
+Antes de publicar:
 
 ```bash
-npm ci --registry=https://registry.npmjs.org/
-npm run dev
-```
-
-## Validação
-
-```bash
+npm ci --include=dev
 npm run check
 npm run lint
 npm run test
@@ -61,17 +139,30 @@ npm run verify:assets
 npm run build:full
 ```
 
-`npm run db:push` executa migrations versionadas/idempotentes em
-`scripts/db-migrate.mjs` e valida o schema com `scripts/db-validate.mjs`.
-Ele não usa `drizzle-kit push`, porque esse comando pode pedir confirmação
-interativa em produção.
-
-## Deploy
-
-Após validação local:
+Depois das validações, o deploy pode ser executado pelo responsável do projeto:
 
 ```bash
 railway up
 ```
 
-O comando acima deve publicar no mesmo serviço Railway já vinculado.
+Não relinkar o serviço Railway sem necessidade. O diretório deve continuar vinculado ao projeto e serviço existentes.
+
+## Documentação
+
+- [Entrega ao Cliente](docs/CLIENT_HANDOVER.md)
+- [Guia de Operação](docs/OPERATION_GUIDE.md)
+- [Deploy e Produção](docs/DEPLOYMENT.md)
+- [Arquitetura Técnica](docs/TECHNICAL_OVERVIEW.md)
+- [Referência de API](docs/API_REFERENCE.md)
+- [Banco de Dados](docs/DATABASE.md)
+- [Variáveis de Ambiente](docs/ENVIRONMENT.md)
+- [Manutenção](docs/MAINTENANCE.md)
+
+## Observações de Produção
+
+- Não commitar `.env` com credenciais reais.
+- Não remover `package-lock.json`.
+- Não instalar Vite globalmente.
+- `devDependencies` são necessárias durante o build.
+- O build não depende de Playwright nem Chromium.
+- Uploads administrativos devem usar volume persistente no Railway.
