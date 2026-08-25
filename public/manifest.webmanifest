@@ -1,0 +1,22 @@
+{
+  "name": "Vila Santa Rosa",
+  "short_name": "Vila Santa Rosa",
+  "description": "Pousada Vila Santa Rosa em Ilhabela",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fdf6f3",
+  "theme_color": "#c73e72",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo-180.webp",
+      "sizes": "180x180",
+      "type": "image/webp"
+    }
+  ]
+}

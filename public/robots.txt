@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /conta
+Disallow: /conta/
+Disallow: /pagamento
+Disallow: /pagamento/
+Disallow: /login
+Disallow: /login/
+Disallow: /redefinir-senha
+Disallow: /redefinir-senha/
+
+Sitemap: https://www.vilasantarosa.com/sitemap.xml

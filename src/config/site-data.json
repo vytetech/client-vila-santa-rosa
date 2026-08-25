@@ -1,0 +1,29 @@
+{
+  "name": "Vila Santa Rosa",
+  "legalName": "Pousada Vila Santa Rosa",
+  "url": "https://www.vilasantarosa.com",
+  "address": {
+    "street": "Rua Rafael Pinto da Rocha, 141",
+    "neighborhood": "Cocaia",
+    "city": "Ilhabela",
+    "state": "SP",
+    "postalCode": "11630-000",
+    "country": "BR"
+  },
+  "geo": {
+    "latitude": -23.8143,
+    "longitude": -45.3622
+  },
+  "phones": {
+    "primary": "+55 12 98805-1401",
+    "secondary": "+55 11 98698-1444",
+    "primaryTel": "+5512988051401",
+    "secondaryTel": "+5511986981444",
+    "whatsapp": "5511986981444"
+  },
+  "checkinTime": "14:00",
+  "checkoutTime": "12:00",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=R.+Rafael+Pinto+da+Rocha,+141+-+Cocaia,+Ilhabela+-+SP,+11630-000",
+  "heroImage": "/images/hero-real.webp",
+  "logo": "/images/logo.png"
+}

@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --theme-primary: 340 65% 55%;
+    --theme-secondary: 14 72% 60%;
+    --theme-accent: 45 90% 55%;
+    --theme-background-light: 350 45% 98%;
+    --theme-background-dark: 345 22% 10%;
+    --theme-text-primary: 345 25% 18%;
+    --theme-text-secondary: 345 12% 42%;
+    --theme-button: 340 65% 55%;
+    --theme-button-hover: 340 55% 51%;
+    --font-heading: 'Cormorant Garamond';
+    --font-body: 'Jost';
+    --background: var(--theme-background-light);
+    --foreground: var(--theme-text-primary);
+    --card: 0 0% 100%;
+    --card-foreground: 345 25% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 345 25% 18%;
+    --primary: var(--theme-primary);
+    --primary-foreground: 350 60% 98%;
+    --secondary: var(--theme-secondary);
+    --secondary-foreground: 350 60% 98%;
+    --muted: 345 30% 93%;
+    --muted-foreground: var(--theme-text-secondary);
+    --accent: var(--theme-accent);
+    --accent-foreground: 345 35% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 345 25% 88%;
+    --input: 345 25% 88%;
+    --ring: var(--theme-primary);
+    --radius: 0.625rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: var(--theme-background-dark);
+    --foreground: 350 25% 94%;
+    --card: 345 20% 14%;
+    --card-foreground: 350 25% 94%;
+    --popover: 345 20% 13%;
+    --popover-foreground: 350 25% 94%;
+    --primary: var(--theme-primary);
+    --primary-foreground: 345 30% 10%;
+    --secondary: var(--theme-secondary);
+    --secondary-foreground: 345 30% 10%;
+    --muted: 345 15% 20%;
+    --muted-foreground: 345 12% 65%;
+    --accent: var(--theme-accent);
+    --accent-foreground: 345 35% 12%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 345 15% 24%;
+    --input: 345 15% 26%;
+    --ring: 340 60% 62%;
+    --sidebar-background: 345 20% 12%;
+    --sidebar-foreground: 350 25% 94%;
+    --sidebar-primary: 340 60% 62%;
+    --sidebar-primary-foreground: 345 30% 10%;
+    --sidebar-accent: 345 15% 20%;
+    --sidebar-accent-foreground: 350 25% 94%;
+    --sidebar-border: 345 15% 24%;
+    --sidebar-ring: 340 60% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body), 'Jost', system-ui, sans-serif;
+  }
+  .font-serif-display {
+    font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
+  }
+}
+
+@layer components {
+  [data-slot='button'][data-variant='default'] {
+    background-color: hsl(var(--theme-button));
+  }
+  [data-slot='button'][data-variant='default']:hover {
+    background-color: hsl(var(--theme-button-hover));
+  }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Arabic (RTL) typography */
+[dir='rtl'] body {
+  font-family: 'Tajawal', system-ui, sans-serif;
+}
+[dir='rtl'] .font-serif-display {
+  font-family: 'Amiri', serif;
+}
+[dir='rtl'] {
+  letter-spacing: 0 !important;
+}
