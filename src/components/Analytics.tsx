@@ -1,6 +1,10 @@
 import { useEffect } from 'react'
 import { trpc } from '@/providers/trpc'
 
+type GtagWindow = Window & {
+  gtag?: (...args: unknown[]) => void
+}
+
 /**
  * Injects Google Analytics 4, Google Search Console verification meta and
  * Meta Pixel — only when the owner has filled the IDs in the admin panel.
@@ -22,16 +26,27 @@ export default function Analytics() {
       document.head.appendChild(meta)
     }
 
-    if (gaId && !document.getElementById('ga4-script')) {
-      const s = document.createElement('script')
-      s.id = 'ga4-script'
-      s.async = true
-      s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`
-      document.head.appendChild(s)
-      const inline = document.createElement('script')
-      inline.id = 'ga4-inline'
-      inline.text = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}');`
-      document.head.appendChild(inline)
+    if (gaId && !document.getElementById('ga4-inline')) {
+      const gtagWindow = window as GtagWindow
+
+      if (gtagWindow.gtag) {
+        gtagWindow.gtag('config', gaId)
+        const marker = document.createElement('script')
+        marker.id = 'ga4-inline'
+        marker.type = 'application/json'
+        marker.text = JSON.stringify({ configured: gaId })
+        document.head.appendChild(marker)
+      } else {
+        const s = document.createElement('script')
+        s.id = 'ga4-script'
+        s.async = true
+        s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`
+        document.head.appendChild(s)
+        const inline = document.createElement('script')
+        inline.id = 'ga4-inline'
+        inline.text = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}');`
+        document.head.appendChild(inline)
+      }
     }
 
     if (metaPixelId && !document.getElementById('meta-pixel')) {
