@@ -1,3 +1,34 @@
+<!-- Apresentação pública padronizada pela VyteTech; documentação técnica original mantida abaixo. -->
+
+<div align="center">
+
+# Pousada Vila Santa Rosa
+
+**Projeto desenvolvido pela [VyteTech](https://vytetech.com)** · Engenharia de software e soluções digitais
+
+[Portfólio VyteTech](https://github.com/vytetech/VyteTech/blob/main/docs/PORTFOLIO.md) · [Contato](mailto:contato@vytetech.com)
+
+</div>
+
+> **Visão geral:** Plataforma digital de hospitalidade com reservas, área do hóspede e painel administrativo.
+
+### Entregas e funcionalidades
+
+- Site multilíngue e pré-renderização para SEO
+- Fluxo de reserva e área do hóspede
+- Administração de acomodações, preços, disponibilidade e conteúdo
+
+**Tecnologias principais:** React, TypeScript, Vite, Hono, tRPC, MySQL e Railway.
+
+**Direitos e uso:** código publicado com autorização do cliente. A disponibilidade pública não representa concessão automática de licença para reutilização ou redistribuição; aplicam-se os direitos e acordos pertinentes.
+
+Para divulgação responsável de questões de segurança, consulte [SECURITY.md](SECURITY.md).
+
+---
+
+<details>
+<summary><strong>Documentação técnica original do projeto (abrir)</strong></summary>
+
 # Vila Santa Rosa
 
 Website oficial e painel administrativo da Pousada Vila Santa Rosa, em Ilhabela.
@@ -166,3 +197,6 @@ Não relinkar o serviço Railway sem necessidade. O diretório deve continuar vi
 - `devDependencies` são necessárias durante o build.
 - O build não depende de Playwright nem Chromium.
 - Uploads administrativos devem usar volume persistente no Railway.
+
+
+</details>
