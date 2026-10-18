@@ -26,10 +26,7 @@ Para divulgação responsável de questões de segurança, consulte [SECURITY.md
 
 ---
 
-<details>
-<summary><strong>Documentação técnica original do projeto (abrir)</strong></summary>
-
-# Vila Santa Rosa
+## Documentação técnica e operação
 
 Website oficial e painel administrativo da Pousada Vila Santa Rosa, em Ilhabela.
 
@@ -198,5 +195,3 @@ Não relinkar o serviço Railway sem necessidade. O diretório deve continuar vi
 - O build não depende de Playwright nem Chromium.
 - Uploads administrativos devem usar volume persistente no Railway.
 
-
-</details>
