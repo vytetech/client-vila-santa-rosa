@@ -195,3 +195,13 @@ Não relinkar o serviço Railway sem necessidade. O diretório deve continuar vi
 - O build não depende de Playwright nem Chromium.
 - Uploads administrativos devem usar volume persistente no Railway.
 
+
+## Governança e documentação
+
+- [Governança documental](docs/GOVERNANCE.md)
+- [Visão de sistema e fluxos](docs/SYSTEM_OVERVIEW_AND_FLOWS.md)
+- [Arquitetura técnica](docs/TECHNICAL_OVERVIEW.md)
+- [Referência de API](docs/API_REFERENCE.md)
+- [Entrega ao cliente](docs/CLIENT_HANDOVER.md)
+
+Os documentos públicos são referências técnicas e não autorizam divulgação de credenciais, registros de usuários, contratos ou informações confidenciais. A manutenção de informações sensíveis pertence aos sistemas restritos da empresa.
